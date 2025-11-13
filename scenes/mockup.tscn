@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjl7mm0356jgq"]
+
+[ext_resource type="Texture2D" uid="uid://nupy68xwfmh2" path="res://resources/sprites/full_backgound.png" id="1_7u70w"]
+[ext_resource type="Texture2D" uid="uid://2pb5jhno4id6" path="res://resources/sprites/angel_alien.png" id="2_h6veu"]
+[ext_resource type="Texture2D" uid="uid://dy51uve3psgyc" path="res://resources/sprites/Ship.png" id="3_63445"]
+[ext_resource type="Texture2D" uid="uid://0yfhivvd3prp" path="res://resources/sprites/earth.png" id="4_sxfdu"]
+[ext_resource type="Texture2D" uid="uid://ckk0nktpf6u4v" path="res://resources/sprites/shield.png" id="5_0pqam"]
+
+[node name="mockup" type="Node2D"]
+
+[node name="FullBackgound" type="Sprite2D" parent="."]
+position = Vector2(128, 120)
+texture = ExtResource("1_7u70w")
+
+[node name="AngelAlien" type="Sprite2D" parent="."]
+position = Vector2(51, 20)
+texture = ExtResource("2_h6veu")
+
+[node name="AngelAlien" type="Sprite2D" parent="AngelAlien"]
+position = Vector2(31, 0)
+texture = ExtResource("2_h6veu")
+
+[node name="AngelAlien" type="Sprite2D" parent="AngelAlien/AngelAlien"]
+position = Vector2(27, 0)
+texture = ExtResource("2_h6veu")
+
+[node name="AngelAlien2" type="Sprite2D" parent="AngelAlien/AngelAlien/AngelAlien"]
+position = Vector2(26, 0)
+texture = ExtResource("2_h6veu")
+
+[node name="AngelAlien" type="Sprite2D" parent="AngelAlien/AngelAlien/AngelAlien/AngelAlien2"]
+position = Vector2(31, 0)
+texture = ExtResource("2_h6veu")
+
+[node name="AngelAlien" type="Sprite2D" parent="AngelAlien/AngelAlien/AngelAlien/AngelAlien2/AngelAlien"]
+position = Vector2(27, 0)
+texture = ExtResource("2_h6veu")
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(127, 189)
+texture = ExtResource("3_63445")
+
+[node name="Earth" type="Sprite2D" parent="."]
+position = Vector2(128, 123)
+texture = ExtResource("4_sxfdu")
+
+[node name="Shield" type="Sprite2D" parent="."]
+position = Vector2(128, 122)
+texture = ExtResource("5_0pqam")
