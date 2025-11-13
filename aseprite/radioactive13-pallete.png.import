@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjko2skd1q27j"
-path="res://.godot/imported/background.png-32e654843b68b024b115f2618eccbeaf.ctex"
+uid="uid://cj378eylh0ova"
+path="res://.godot/imported/radioactive13-pallete.png-d7d25ab70e69de25d662d5e2ef6fc5fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/background.png"
-dest_files=["res://.godot/imported/background.png-32e654843b68b024b115f2618eccbeaf.ctex"]
+source_file="res://aseprite/radioactive13-pallete.png"
+dest_files=["res://.godot/imported/radioactive13-pallete.png-d7d25ab70e69de25d662d5e2ef6fc5fb.ctex"]
 
 [params]
 
