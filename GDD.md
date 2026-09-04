@@ -65,6 +65,7 @@ The player is the only one left capable of fighting the last invasion attempt. A
 The last enemy will be a boss portraying a biblically accurate alien with realistic art style maybe.
 
 ## Timeline
+
 Dialog appears -> "we are all counting on you or something" -> aliens appear -> fight! -> player kills 3 waves -> Boss appears, ominous music -> idk.
 
 ## Other
