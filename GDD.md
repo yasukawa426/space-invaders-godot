@@ -10,6 +10,7 @@ The fewer enemies that remain, the faster the formation moves
 
 - The player moves horizontally and shoots missile up at the alien formation.
 - Player missiles can delete enemy bullets
+- The Player can only have 1 missile in the screen at the same time, only being able to fire when its projectile is gone.
 - The player dies in one hit.
 - The player has 3 lives.
 - When losing a life, the game pauses for a short moment before continuing.
