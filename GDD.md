@@ -56,6 +56,8 @@ Audio should be retro arcades inspired, with a anxiety (when faster) inducing so
 
 The last enemy will be a boss portraying a biblically accurate alien with realistic art style maybe.
 
+![Example Mockup Image](doc/mockup.png)
+
 ## Story
 
 Humanity has been being attacked (being invaded) by aliens for quite some time now. War has brought death and destruction, but humanity managed to push them back with great sacrifices.
