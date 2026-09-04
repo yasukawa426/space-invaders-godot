@@ -30,6 +30,10 @@ window/size/viewport_height=240
 window/size/mode=3
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/PaletteTools/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg")
+
 [input]
 
 move_left={

@@ -2,5 +2,4 @@
 .godot/
 /android/
 # Time tracker addon
-addons/project-time-tracker/
 project_time_traker.json
