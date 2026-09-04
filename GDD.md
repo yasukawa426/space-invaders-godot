@@ -15,7 +15,7 @@ The fewer enemies that remain, the faster the formation moves
 - When losing a life, the game pauses for a short moment before continuing.
 
 # Enemies
-
+- There are 3 enemies types. With the only difference being the sprites. Besides that, they are fundamentally the same.
 - All enemies die in one hit, with the exception of the ovni mothership.
 - The aliens move in a formation. The formation moves from side to side, moving downwards when it reaches the edge of the screen, and then reversing direction. (goes right -> all lines move down -> goes left...)
 - An ovni mothership occasionally flies behind the alien formation.
