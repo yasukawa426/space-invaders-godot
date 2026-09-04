@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ctoy457chaatl"]
+
+[ext_resource type="Script" uid="uid://c2pf7j22wt6bs" path="res://entities/player/missile.gd" id="1_rjxn5"]
+[ext_resource type="Texture2D" uid="uid://3loa6l6ocnyq" path="res://entities/player/missile.png" id="2_nyri7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seq8f"]
+size = Vector2(4, 6)
+
+[node name="Missile" type="Area2D" unique_id=759017902]
+script = ExtResource("1_rjxn5")
+speed = 250.0
+flying_direction = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=722575274]
+texture = ExtResource("2_nyri7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=825586961]
+shape = SubResource("RectangleShape2D_seq8f")
