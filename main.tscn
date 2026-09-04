@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bgi21s1hlbsy8"]
+
+[ext_resource type="Script" uid="uid://6k8235ddbr4j" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://nupy68xwfmh2" path="res://shared/sprites/full_backgound.png" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b120dwbh0b3o7" path="res://entities/player/player.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D" unique_id=510868186]
+texture_filter = 1
+script = ExtResource("1_h2yge")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=600698838]
+position = Vector2(128, 120)
+texture = ExtResource("1_ig7tw")
+
+[node name="Player" parent="." unique_id=108294258 instance=ExtResource("2_0xm2m")]
+position = Vector2(128, 192)
+
+[node name="MoveTimer" type="Timer" parent="." unique_id=1549741109]
+wait_time = 0.5
+autostart = true
+
+[node name="enemies" type="Node" parent="." unique_id=708050252]
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
