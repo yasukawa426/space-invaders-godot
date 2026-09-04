@@ -23,6 +23,7 @@ The fewer enemies that remain, the faster the formation moves
 - An enemy can only shoot when there is no other enemy directly lower than it.
 
 # Boss
+
 The final boss is significantly different from the normal enemies.
 
 - The boss moves freely rather than following the alien formation's grid-based movement.
@@ -57,18 +58,20 @@ The last enemy will be a boss portraying a biblically accurate alien with realis
 
 ## Story
 
-Humanity has been being attacked (being invaded) by aliens for quite some time now. War has brought death and destruction, but humanity managed to push them back with great sacrifices. 
+Humanity has been being attacked (being invaded) by aliens for quite some time now. War has brought death and destruction, but humanity managed to push them back with great sacrifices.
 
 The player is the only one left capable of fighting the last invasion attempt. Also, the aliens are crying and we don't know why.
 
 The last enemy will be a boss portraying a biblically accurate alien with realistic art style maybe.
 
 ## Timeline
-
-WIP
+Dialog appears -> "we are all counting on you or something" -> aliens appear -> fight! -> player kills 3 waves -> Boss appears, ominous music -> idk.
 
 ## Other
+
 Boss roars
+Would be dope if there is some help in the boss, like, the Earth is shoot because you didn't manage to protect it but then a dialog appears just before the Earth is hit and saves you or something. Music changes, etc.
+I will use Dialogic 2 for dialogs.
 
 Formation {Base Enemy > Unique Enemy.}
 Formation controls the enemy position and if its allowed to fire.
