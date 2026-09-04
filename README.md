@@ -10,8 +10,10 @@ WIP <br>
 <img src="https://github.com/yasukawa426/space-invaders-godot/blob/master/mockup.png" alt="Mockup print" width="400">
 ### Goals
 - [ ] Art
-  - [ ] Player ship
+  - [X] Player ship
+  - [X] Player missile
   - [ ] 4 aliens (angel) types
+  - [ ] 1 alien laser
   - [ ] Special Invader (UFO equivalent)
 - [ ] Create a player ship that moves side to side
 - [ ] Multiple types of alien invaders (around 4)

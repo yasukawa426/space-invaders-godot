@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dh8bpdx86hy2v" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="Texture2D" uid="uid://dy51uve3psgyc" path="res://entities/player/Ship.png" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://ctoy457chaatl" path="res://entities/player/missile.tscn" id="2_sglur"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_symyc"]
 radius = 8.0
@@ -11,6 +12,7 @@ height = 18.0
 z_index = 10
 motion_mode = 1
 script = ExtResource("1_abrql")
+bullet = ExtResource("2_sglur")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2090535317]
 position = Vector2(0, -2)
@@ -18,3 +20,6 @@ shape = SubResource("CapsuleShape2D_symyc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2112420132]
 texture = ExtResource("1_symyc")
+
+[node name="BulletMarker2D" type="Marker2D" parent="." unique_id=1457881304]
+position = Vector2(0, -14)
