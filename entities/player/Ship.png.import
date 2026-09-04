@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0yfhivvd3prp"
-path="res://.godot/imported/earth.png-095c3019803eae06dc60fbc089469fa5.ctex"
+uid="uid://dy51uve3psgyc"
+path="res://.godot/imported/Ship.png-5eb7b68f5bb557fdde2c4d35a91584d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/sprites/earth.png"
-dest_files=["res://.godot/imported/earth.png-095c3019803eae06dc60fbc089469fa5.ctex"]
+source_file="res://entities/player/Ship.png"
+dest_files=["res://.godot/imported/Ship.png-5eb7b68f5bb557fdde2c4d35a91584d4.ctex"]
 
 [params]
 

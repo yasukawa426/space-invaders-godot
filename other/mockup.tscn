@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dny3vaoufo2er"]
+[gd_scene format=3 uid="uid://cjl7mm0356jgq"]
 
 [ext_resource type="Texture2D" uid="uid://nupy68xwfmh2" path="res://shared/sprites/full_backgound.png" id="1_7u70w"]
 [ext_resource type="Texture2D" uid="uid://2pb5jhno4id6" path="res://entities/enemies/angel_alien.png" id="2_h6veu"]
