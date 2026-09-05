@@ -22,7 +22,7 @@ WIP <br>
 - [ ] Add bombs/bullets that the enemies drop. The player’s rockets can destroy enemy bullets
 - [ ] Make sure that the player’s bullets will destroy invaders, and the invader bullets will destroy the player
 - [ ] Add a UI that tracks the player score and lives left. The player starts with three lives
-- [ ] Add sound effects (shooting, hit, music, gameover, etc)
+- [ ] Add sound effects (shooting, hit, music, game over, etc)
 ### Bonus
 - [ ] Shield protecting Earth that can take  ~3 hits
   - [ ] Shield gets visually weaker the lower the health 
@@ -33,4 +33,4 @@ WIP <br>
 - [ ] A portrait for the mc? (probably not tho. idk how to draw)
 
 ### Credits
-RADIOACTIVE13 pallete by Miguel Lucero -- https://lospec.com/palette-list/radioactive13 <br/>
+RADIOACTIVE13 palette by Miguel Lucero -- https://lospec.com/palette-list/radioactive13 <br/>
