@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d24kiku0wbpr3"
-path="res://.godot/imported/angel_alien.png-dcd6458bfd1804b7cdf55582c033a0a0.ctex"
+uid="uid://dd0xqfa8ynf5l"
+path="res://.godot/imported/angel_alien_2.png-f3c8382e236e60e60062e58e6b7a6506.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/angel_alien.png"
-dest_files=["res://.godot/imported/angel_alien.png-dcd6458bfd1804b7cdf55582c033a0a0.ctex"]
+source_file="res://entities/enemies/angel_alien_2.png"
+dest_files=["res://.godot/imported/angel_alien_2.png-f3c8382e236e60e60062e58e6b7a6506.ctex"]
 
 [params]
 
