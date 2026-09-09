@@ -52,3 +52,8 @@ func _shoot():
 
 func _on_missile_destroyed():
 	_can_fire = true
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	##TODO: DIE (lose lives and then gameover)
+	print("got shot")
