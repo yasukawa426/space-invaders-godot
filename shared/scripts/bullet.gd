@@ -21,8 +21,7 @@ func _ready():
 	add_child(visible_notifier)
 	visible_notifier.screen_exited.connect(_destroy)
 	
-	# FIXME: not detecting when hitting enemy
-	area_entered.connect(_destroy)
+	area_entered.connect(_on_hit_something)
 
 
 func _process(delta: float) -> void:
@@ -43,6 +42,11 @@ func _get_direction_vector(direction: Direction) -> Vector2:
 		
 	return Vector2.DOWN
 
+## Method called when the bullet hits another Aread2D
+@abstract
+func _on_hit_something(area: Area2D)
+
+## Emits destroyed signal and then removed itself from tree
 func _destroy() -> void:
 	destroyed.emit()
 	queue_free()
