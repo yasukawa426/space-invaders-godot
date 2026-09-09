@@ -34,6 +34,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/PaletteTools/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://cd3fjybhyjq8n"
+
 [input]
 
 move_left={
