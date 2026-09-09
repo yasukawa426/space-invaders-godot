@@ -9,7 +9,7 @@ enum  Types {
 
 
 ## Marker representing the position the bullet will spawn
-var bullet_spawn: Marker2D
+var _bullet_spawn: Marker2D
 ## Sprites
 var _animator: AnimatedSprite2D
 ## Amount of point that will give when dying.
@@ -32,7 +32,7 @@ func set_type(type: Types):
 ## Spawn a bullet 
 func shoot():
 	var projectile: Bullet = _bullet_scene.instantiate()
-	projectile.global_position = bullet_spawn.global_position
+	projectile.global_position = _bullet_spawn.global_position
 	
 	get_tree().root.add_child(projectile)
 
@@ -40,7 +40,7 @@ func shoot():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_animator = $AnimatedSprite2D
-	bullet_spawn = $Marker2D
+	_bullet_spawn = $Marker2D
 
 ## Moving, just updates frame
 func move() -> void:
