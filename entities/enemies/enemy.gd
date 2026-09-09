@@ -14,9 +14,9 @@ var bullet_spawn: Marker2D
 var _animator: AnimatedSprite2D
 ## Amount of point that will give when dying.
 var _score: int
+## Scene to be instantieted as bullet
+@export var _bullet_scene: PackedScene = preload("res://entities/enemies/laser.tscn")
 
-## Bullet that will be spawned when shooting
-@export var bullet: PackedScene
 
 func set_type(type: Types):
 	##TODO: set correct sprite and point
@@ -29,12 +29,12 @@ func set_type(type: Types):
 	
 	pass
 
+## Spawn a bullet 
 func shoot():
-	# TODO: shoot and stuff
-	var projectile: Bullet = bullet.instantiate()
-	Bullet.global_position = bullet_spawn.global_position
+	var projectile: Bullet = _bullet_scene.instantiate()
+	projectile.global_position = bullet_spawn.global_position
 	
-	pass
+	get_tree().root.add_child(projectile)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,7 +50,7 @@ func move() -> void:
 		_animator.frame = 0 
 
 
-## Got shot
+## Got shot - body is the bullet
 func _on_body_entered(body: Node2D) -> void:
 	died.emit(_score)
 	queue_free()
