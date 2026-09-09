@@ -1,58 +1,125 @@
 [gd_scene format=3 uid="uid://dem8h2pcofkei"]
 
 [ext_resource type="Script" uid="uid://davfm4mpilx4y" path="res://entities/enemies/enemy.gd" id="1_vrelh"]
-[ext_resource type="Texture2D" uid="uid://2pb5jhno4id6" path="res://entities/enemies/angel_alien.png" id="2_2okab"]
+[ext_resource type="Texture2D" uid="uid://d24kiku0wbpr3" path="res://entities/enemies/angel_alien.png" id="2_2okab"]
+[ext_resource type="Texture2D" uid="uid://dd0xqfa8ynf5l" path="res://entities/enemies/angel_alien_2.png" id="3_5lf1o"]
+[ext_resource type="Texture2D" uid="uid://cdr4kt6ibw67u" path="res://entities/enemies/angel_alien_3.png" id="3_msovg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y6egb"]
-radius = 7.0
-height = 14.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wqcwe"]
-atlas = ExtResource("2_2okab")
-region = Rect2(0, 0, 16, 16)
+radius = 6.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lf1o"]
 atlas = ExtResource("2_2okab")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4yt1"]
+atlas = ExtResource("2_2okab")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipr6v"]
+atlas = ExtResource("2_2okab")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msovg"]
+atlas = ExtResource("3_msovg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twyc1"]
+atlas = ExtResource("3_msovg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj3y3"]
+atlas = ExtResource("3_msovg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb13e"]
+atlas = ExtResource("3_5lf1o")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3udgd"]
+atlas = ExtResource("3_5lf1o")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vabdn"]
+atlas = ExtResource("3_5lf1o")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wqcwe"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wqcwe")
+"texture": SubResource("AtlasTexture_5lf1o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5lf1o")
+"texture": SubResource("AtlasTexture_w4yt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipr6v")
 }],
 "loop": true,
 "name": &"angel",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msovg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twyc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj3y3")
+}],
 "loop": true,
-"name": &"dude",
+"name": &"square",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb13e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3udgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vabdn")
+}],
 "loop": true,
-"name": &"snake",
+"name": &"tentacle",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5lf1o"]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrfwl"]
+size = Vector2(18, 14)
 
 [node name="Enemy" type="Area2D" unique_id=674559780]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_vrelh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=990995376]
+[node name="AngelCollisionShape2D" type="CollisionShape2D" parent="." unique_id=990995376]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_y6egb")
+disabled = true
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1943677140]
 position = Vector2(0, 9)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1149364240]
 sprite_frames = SubResource("SpriteFrames_wqcwe")
-animation = &"angel"
+animation = &"square"
+
+[node name="TentacleCollisionShape2D" type="CollisionShape2D" parent="." unique_id=657749139]
+shape = SubResource("CapsuleShape2D_5lf1o")
+disabled = true
+
+[node name="SquareCollisionShape2D" type="CollisionShape2D" parent="." unique_id=1322469686]
+shape = SubResource("RectangleShape2D_nrfwl")
+disabled = true
 
 [connection signal="area_entered" from="." to="." method="_on_body_entered"]

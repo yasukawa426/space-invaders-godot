@@ -12,7 +12,7 @@ WIP <br>
 - [ ] Art
   - [X] Player ship
   - [X] Player missile
-  - [ ] 3 aliens (angel) types
+  - [X] 3 aliens (angel) types
   - [ ] 1 alien laser
   - [ ] Special Invader (UFO equivalent)
 - [X] Create a player ship that moves side to side

@@ -3,8 +3,8 @@ signal died(score: int)
 
 enum  Types {
 	ANGEL, ## Furthest row. 30 points.
-	DUDE,
-	SNAKE,
+	TENTACLE, ## Middle row. 20 points.
+	SQUARE, ## Front row, 10 points.
 }
 
 
@@ -24,7 +24,17 @@ func set_type(type: Types):
 		Types.ANGEL:
 			_animator.animation = "angel"
 			_score = 30
-			
+			$AngelCollisionShape2D.set_deferred("disabled", false)
+		
+		Types.TENTACLE:
+			_animator.animation = "tentacle"
+			_score = 20
+			$TentacleCollisionShape2D.set_deferred("disabled", false)
+		
+		Types.SQUARE:
+			_animator.animation = "square"
+			_score = 10
+			$SquareCollisionShape2D.set_deferred("disabled", false)
 	
 	
 	pass
@@ -54,3 +64,4 @@ func move() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	died.emit(_score)
 	queue_free()
+	##TODO: on last wave, play frame 2 on death freeze
