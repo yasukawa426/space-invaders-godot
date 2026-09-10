@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://vryn07co2gnd"]
+
+[ext_resource type="Script" uid="uid://be8p7i63asmyb" path="res://entities/enemies/laser.gd" id="1_15wkh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_15wkh"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_15wkh"]
+radius = 5.0
+height = 16.0
+
+[node name="Laser" type="Area2D" unique_id=1405706255]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_15wkh")
+
+[node name="Polygon2D" type="MeshInstance2D" parent="." unique_id=1513176791]
+mesh = SubResource("CapsuleMesh_15wkh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1654158473]
+shape = SubResource("CapsuleShape2D_15wkh")
