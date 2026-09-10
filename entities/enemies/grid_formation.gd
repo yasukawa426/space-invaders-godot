@@ -23,17 +23,17 @@ const FORMATION_SPAWN_DELAY_AMOUNT: float = 0.025
 const HORIZONTAL_MOVE_DISTANCE: int = 2
 ## The vertical distance the formation will move when moving downwards.
 const VERTICAL_MOVE_DISTANCE: int = 5
-
-
 ## Enemy scene to spawn.
-@onready var packed_enemy: PackedScene = preload("res://entities/enemies/enemy.tscn")
+const PACKED_ENEMY: PackedScene = preload("res://entities/enemies/enemy.tscn")
+
+
 ## Number of total enemies this formation has.
 var total_enemies: int
 ## Number of current alive enemies this formation has.
 var alive_enemies: int
 
 ## Wheter any enemy touched the border and the formation still hasnt moved down.
-var _has_to_moved_down: bool = false
+var _has_to_move_down: bool = false
 ## The direction which the formation is moving. 1 means moving to the right, -1 means moving to the left.
 var _direction: int = 1 
 ## The initial position of the formation when it is created. Used to reset the formation to its original position.
@@ -50,9 +50,9 @@ func _on_move_timer_timeout() -> void:
 	for enemy in get_children():
 		enemy.move()
 
-	if _has_to_moved_down:
+	if _has_to_move_down:
 		position.y += VERTICAL_MOVE_DISTANCE
-		_has_to_moved_down = false
+		_has_to_move_down = false
 	else:
 		position.x += _direction * HORIZONTAL_MOVE_DISTANCE
 
@@ -64,15 +64,17 @@ func formation_position_to_global_position(formation_position: Vector2i) -> Vect
 func _reset_formation(columns: int, rows: int) -> void:
 	formation_reseting.emit()
 
+	_direction = 1
+	_has_to_move_down = false
 	position = _initial_position
+
+
 	for row in range(rows):
 		for column in range(columns):
-			var enemy: Enemy = packed_enemy.instantiate()
+			var enemy: Enemy = PACKED_ENEMY.instantiate()
+
 			enemy.formation_position = Vector2i(column, row)
 			enemy.position = formation_position_to_global_position(enemy.formation_position)
-			add_child(enemy)
-			# enemies.append(enemy)
-			await get_tree().create_timer(FORMATION_SPAWN_DELAY_AMOUNT).timeout
 
 			# One row of angels and 2 of tentacles. The rest are squares.
 			if row == 0:
@@ -82,8 +84,12 @@ func _reset_formation(columns: int, rows: int) -> void:
 			else:
 				enemy.set_type(Enemy.Types.SQUARE)
 				
-			
+			add_child(enemy)
 			enemy.died.connect(_on_enemy_died)
+
+			await get_tree().create_timer(FORMATION_SPAWN_DELAY_AMOUNT).timeout
+
+			
 			
 	total_enemies = get_child_count()
 	alive_enemies = total_enemies
@@ -95,14 +101,14 @@ func _on_enemy_died(score: int) -> void:
 	enemy_died.emit(score)
 
 
-## Called when the formation touches the left or right world border. Inverts _direction and goes down.
+## Called when the formation touches the left world border. Sets the direction to the right and _has_to_move_down to true.
 func _on_left_border_area_entered(area: Area2D) -> void:
 	print("touched left border")
 	_direction = 1
-	_has_to_moved_down = true
+	_has_to_move_down = true
 
-## Called when the formation touches the left or right world border. Inverts _direction and goes down.
+## Called when the formation touches the right world border. Sets the direction to the left and _has_to_move_down to true.
 func _on_right_border_area_entered(area: Area2D) -> void:
 	print("touched right border")
 	_direction =  -1
-	_has_to_moved_down = true
+	_has_to_move_down = true
