@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b0v7koi3cfs8s"]
+
+[ext_resource type="Texture2D" uid="uid://nupy68xwfmh2" path="res://shared/sprites/full_backgound.png" id="1_eoe1t"]
+
+[node name="Background" type="Node2D" unique_id=1921451765]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1767104418]
+scroll_scale = Vector2(2, 2)
+repeat_size = Vector2(256, 240)
+autoscroll = Vector2(0.5, 0)
+
+[node name="FullBackgound" type="Sprite2D" parent="Parallax2D" unique_id=2138947013]
+position = Vector2(128, 120)
+texture = ExtResource("1_eoe1t")
