@@ -39,9 +39,8 @@ The final boss is significantly different from the normal enemies.
 
 # Lose Condition
 
-- The player loses all life
-- Earth is shoot 3 times (2 times on shield, once directly)
-- Aliens reach Earth (not shield - shields breaks when reached)
+- The player loses all lifes
+- An alien reach the Earth 2 times (once on shield, once directly)
 
 # Core Gameplay Loop
 
