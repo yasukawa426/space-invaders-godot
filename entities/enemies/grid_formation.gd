@@ -68,6 +68,9 @@ func _reset_formation(columns: int, rows: int) -> void:
 	_has_to_move_down = false
 	position = _initial_position
 
+	for enemy in get_children():
+		enemy.queue_free()
+
 
 	for row in range(rows):
 		for column in range(columns):
