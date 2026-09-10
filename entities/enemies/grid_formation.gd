@@ -6,6 +6,8 @@ class_name Formation extends Node2D
 signal enemy_died(score: int)
 ## Emitted whenever the formation has finished spawning in enemies.
 signal formation_ready
+## Emitted whenever the formation is about to reset.
+signal formation_reseting
 
 ## Vertical spacing between enemies. Enemies sprites are 16x16, so we add 16 to the spacing to avoid overlapping.
 const VERTICAL_SPACING: int = 15 + 16
@@ -34,11 +36,14 @@ var alive_enemies: int
 var _has_to_moved_down: bool = false
 ## The direction which the formation is moving. 1 means moving to the right, -1 means moving to the left.
 var _direction: int = 1 
-
+## The initial position of the formation when it is created. Used to reset the formation to its original position.
+var _initial_position: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	await get_tree().create_timer(0.1).timeout
+	_initial_position = position
+
 	_reset_formation(COLUMNS, ROWS)
 
 func _on_move_timer_timeout() -> void:
@@ -54,8 +59,12 @@ func _on_move_timer_timeout() -> void:
 func formation_position_to_global_position(formation_position: Vector2i) -> Vector2:
 	return Vector2(formation_position.x * HORIZONTAL_SPACING, formation_position.y * VERTICAL_SPACING)
 
-## Spawns in enemies in a grid formation with `columns` columns and `rows` rows. With a short delay on each spawn. Emits `formation_ready` when done. 
+## Resets the formation to its initial state, spawning enemies in a grid pattern in the process. 
+## Emits `formation_reseting` signal when the formation is about to reset, and `formation_ready` signal when the formation has finished spawning in enemies.
 func _reset_formation(columns: int, rows: int) -> void:
+	formation_reseting.emit()
+
+	position = _initial_position
 	for row in range(rows):
 		for column in range(columns):
 			var enemy: Enemy = packed_enemy.instantiate()
