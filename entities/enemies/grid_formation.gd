@@ -2,8 +2,10 @@
 ## The enemies start on the first 5 rows of the screen, and they move downwards as the game progresses, having in total 10 rows.
 ## The enemies first go to the edge of the screen, then they move downwards and go to the other edge of the screen, repeating this process until they reach the bottom of the screen (Earth).
 class_name Formation extends Node2D
-
+## Emitted whenever an enemy from the formation dies. "score" is the amount of score the dead enemy provides.
 signal enemy_died(score: int)
+## Emitted whenever the formation has finished spawning in enemies.
+signal formation_ready
 
 ## Vertical spacing between enemies. Enemies sprites are 16x16, so we add 16 to the spacing to avoid overlapping.
 const VERTICAL_SPACING: int = 15 + 16
@@ -12,27 +14,31 @@ const HORIZONTAL_SPACING: int = 11 + 16
 ## The number of rows of enemies.
 const ROWS: int = 5
 ## The number of columns of enemies.
-const COLUMNS: int = 11
-## The direction which the formation is moving. 1 means moving to the right, -1 means moving to the left.
-var direction: int = 1 
-
+const COLUMNS: int = 14
+## The amount of time between each enemy spawn when resetting formation.
+const FORMATION_SPAWN_DELAY_AMOUNT: float = 0.025
 ## The horizontal distance the formation will move when moving.
-const HORIZONTAL_MOVE_DISTANCE: int = 5
+const HORIZONTAL_MOVE_DISTANCE: int = 2
 ## The vertical distance the formation will move when moving downwards.
 const VERTICAL_MOVE_DISTANCE: int = 5
 
+
 ## Enemy scene to spawn.
 @onready var packed_enemy: PackedScene = preload("res://entities/enemies/enemy.tscn")
-## Wheter any enemy touched the border and the formation still hasnt moved down.
-var _has_to_moved_down: bool = false
-
 ## Number of total enemies this formation has.
 var total_enemies: int
 ## Number of current alive enemies this formation has.
 var alive_enemies: int
 
+## Wheter any enemy touched the border and the formation still hasnt moved down.
+var _has_to_moved_down: bool = false
+## The direction which the formation is moving. 1 means moving to the right, -1 means moving to the left.
+var _direction: int = 1 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
+	await get_tree().create_timer(0.1).timeout
 	_reset_formation(COLUMNS, ROWS)
 
 func _on_move_timer_timeout() -> void:
@@ -43,11 +49,12 @@ func _on_move_timer_timeout() -> void:
 		position.y += VERTICAL_MOVE_DISTANCE
 		_has_to_moved_down = false
 	else:
-		position.x += direction * HORIZONTAL_MOVE_DISTANCE
+		position.x += _direction * HORIZONTAL_MOVE_DISTANCE
 
 func formation_position_to_global_position(formation_position: Vector2i) -> Vector2:
 	return Vector2(formation_position.x * HORIZONTAL_SPACING, formation_position.y * VERTICAL_SPACING)
 
+## Spawns in enemies in a grid formation with `columns` columns and `rows` rows. With a short delay on each spawn. Emits `formation_ready` when done. 
 func _reset_formation(columns: int, rows: int) -> void:
 	for row in range(rows):
 		for column in range(columns):
@@ -56,6 +63,7 @@ func _reset_formation(columns: int, rows: int) -> void:
 			enemy.position = formation_position_to_global_position(enemy.formation_position)
 			add_child(enemy)
 			# enemies.append(enemy)
+			await get_tree().create_timer(FORMATION_SPAWN_DELAY_AMOUNT).timeout
 
 			# One row of angels and 2 of tentacles. The rest are squares.
 			if row == 0:
@@ -70,20 +78,22 @@ func _reset_formation(columns: int, rows: int) -> void:
 			
 	total_enemies = get_child_count()
 	alive_enemies = total_enemies
+	
+	formation_ready.emit()
 
 func _on_enemy_died(score: int) -> void:
 	alive_enemies -= 1
 	enemy_died.emit(score)
 
 
-## Called when the formation touches the left or right world border. Inverts direction and goes down.
+## Called when the formation touches the left or right world border. Inverts _direction and goes down.
 func _on_left_border_area_entered(area: Area2D) -> void:
 	print("touched left border")
-	direction = 1
+	_direction = 1
 	_has_to_moved_down = true
 
-## Called when the formation touches the left or right world border. Inverts direction and goes down.
+## Called when the formation touches the left or right world border. Inverts _direction and goes down.
 func _on_right_border_area_entered(area: Area2D) -> void:
 	print("touched right border")
-	direction =  -1
+	_direction =  -1
 	_has_to_moved_down = true
