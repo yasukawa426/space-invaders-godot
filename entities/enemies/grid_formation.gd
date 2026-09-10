@@ -17,8 +17,8 @@ const HORIZONTAL_SPACING: int = 11 + 16
 const ROWS: int = 5
 ## The number of columns of enemies.
 const COLUMNS: int = 14
-## The amount of time between each enemy spawn when resetting formation.
-const FORMATION_SPAWN_DELAY_AMOUNT: float = 0.025
+## The total amount of time the formation should take to spawn in seconds.
+const FORMATION_TOTAL_SPAWN_DELAY_AMOUNT: float = 1.25
 ## The horizontal distance the formation will move when moving.
 const HORIZONTAL_MOVE_DISTANCE: int = 2
 ## The vertical distance the formation will move when moving downwards.
@@ -68,6 +68,11 @@ func _reset_formation(columns: int, rows: int) -> void:
 	_has_to_move_down = false
 	position = _initial_position
 
+	total_enemies = columns * rows
+	alive_enemies = total_enemies
+
+	var enemy_spawn_delay: float = FORMATION_TOTAL_SPAWN_DELAY_AMOUNT / float(total_enemies)
+
 	for enemy in get_children():
 		enemy.queue_free()
 
@@ -90,12 +95,7 @@ func _reset_formation(columns: int, rows: int) -> void:
 				
 			enemy.died.connect(_on_enemy_died)
 
-			await get_tree().create_timer(FORMATION_SPAWN_DELAY_AMOUNT).timeout
-
-			
-			
-	total_enemies = get_child_count()
-	alive_enemies = total_enemies
+			await get_tree().create_timer(enemy_spawn_delay).timeout
 	
 	formation_ready.emit()
 
