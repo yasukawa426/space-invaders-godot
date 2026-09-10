@@ -70,7 +70,9 @@ script = ExtResource("7_272bh")
 
 [connection signal="enemy_died" from="Entities/GridFormation" to="." method="_on_grid_formation_enemy_died"]
 [connection signal="enemy_died" from="Entities/GridFormation" to="MoveTimer" method="_on_grid_formation_enemy_died"]
+[connection signal="formation_ready" from="Entities/GridFormation" to="Entities/Player" method="_on_grid_formation_formation_ready"]
 [connection signal="formation_ready" from="Entities/GridFormation" to="MoveTimer" method="_on_grid_formation_formation_ready"]
+[connection signal="formation_reseting" from="Entities/GridFormation" to="Entities/Player" method="_on_grid_formation_formation_reseting"]
 [connection signal="formation_reseting" from="Entities/GridFormation" to="MoveTimer" method="_on_grid_formation_formation_reseting"]
 [connection signal="area_entered" from="LeftWall" to="Entities/GridFormation" method="_on_left_border_area_entered"]
 [connection signal="area_entered" from="RightWall" to="Entities/GridFormation" method="_on_right_border_area_entered"]
