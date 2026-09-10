@@ -75,6 +75,7 @@ func _reset_formation(columns: int, rows: int) -> void:
 
 			enemy.formation_position = Vector2i(column, row)
 			enemy.position = formation_position_to_global_position(enemy.formation_position)
+			add_child(enemy)
 
 			# One row of angels and 2 of tentacles. The rest are squares.
 			if row == 0:
@@ -84,7 +85,6 @@ func _reset_formation(columns: int, rows: int) -> void:
 			else:
 				enemy.set_type(Enemy.Types.SQUARE)
 				
-			add_child(enemy)
 			enemy.died.connect(_on_enemy_died)
 
 			await get_tree().create_timer(FORMATION_SPAWN_DELAY_AMOUNT).timeout
