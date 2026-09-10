@@ -3,3 +3,5 @@
 /android/
 # Time tracker addon
 project_time_traker.json
+*.tmp
+export/
