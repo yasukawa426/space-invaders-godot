@@ -8,6 +8,8 @@ signal enemy_died(score: int)
 signal formation_ready
 ## Emitted whenever the formation is about to reset.
 signal formation_reseting
+## Emitted whenever the formation has been destroyed (all enemies are dead).
+signal formation_destroyed
 
 ## Vertical spacing between enemies. Enemies sprites are 16x16, so we add 16 to the spacing to avoid overlapping.
 const VERTICAL_SPACING: int = 15 + 16
@@ -24,9 +26,15 @@ const HORIZONTAL_MOVE_DISTANCE: int = 2
 ## The vertical distance the formation will move when moving downwards.
 const VERTICAL_MOVE_DISTANCE: int = 5
 ## Enemy scene to spawn.
-const PACKED_ENEMY: PackedScene = preload("res://entities/enemies/enemy.tscn")
+const _PACKED_ENEMY: PackedScene = preload("res://entities/enemies/enemy.tscn")
+## The initial pitch scale of the formation movement sound. It will have 4 levels, and each time the sound is played, the pitch scale will decrease by _AUDIO_PITCH_SCALE_STEP. When it reaches the last level, it will reset to this value.
+const _INITIAL_AUDIO_PITCH_SCALE: float = 0.6
+## The amount the pitch scale of the formation movement sound will decrease each time the sound is played.
+const _AUDIO_PITCH_SCALE_STEP: float = 0.1
 
 
+## AudioStreamPlayer for the formation movement.
+@onready var move_audio_player: AudioStreamPlayer = $"../../FormationAudioStreamPlayer"
 ## Number of total enemies this formation has.
 var total_enemies: int
 ## Number of current alive enemies this formation has.
@@ -46,6 +54,10 @@ func _ready() -> void:
 
 	_reset_formation(COLUMNS, ROWS)
 
+	move_audio_player.set_pitch_scale(_INITIAL_AUDIO_PITCH_SCALE)
+	
+
+## Callend when the move timer times out. Tell every enemy in the formation to update sprite, moves the entire formation, and play a sound.
 func _on_move_timer_timeout() -> void:
 	for enemy in get_children():
 		enemy.move()
@@ -55,6 +67,43 @@ func _on_move_timer_timeout() -> void:
 		_has_to_move_down = false
 	else:
 		position.x += _direction * HORIZONTAL_MOVE_DISTANCE
+
+
+## Called when the sound timer times out. Plays the movement sound and decreases the pitch scale of the sound. The pitch scale has 4 levels, and when it reaches the last one, it resets to the initial pitch scale. 
+func _on_sound_timer_timeout() -> void:
+	
+	var min_pitch_scale: float = _INITIAL_AUDIO_PITCH_SCALE - _AUDIO_PITCH_SCALE_STEP * 3
+
+	# float numbers are fuck,ing wierd so i am doing these rounding when comparing them. 
+	if snappedf(move_audio_player.pitch_scale, _AUDIO_PITCH_SCALE_STEP) <= snappedf(min_pitch_scale, _AUDIO_PITCH_SCALE_STEP):
+		move_audio_player.set_pitch_scale(_INITIAL_AUDIO_PITCH_SCALE)
+	else:
+		move_audio_player.set_pitch_scale(move_audio_player.pitch_scale - _AUDIO_PITCH_SCALE_STEP)
+
+	print("Formation audio pitch scale is ",  move_audio_player.pitch_scale)
+	move_audio_player.play()
+
+func _on_enemy_died(score: int) -> void:
+	alive_enemies -= 1
+	enemy_died.emit(score)
+
+	## all dead
+	if alive_enemies <= 0:
+		formation_destroyed.emit()
+
+
+## Called when the formation touches the left world border. Sets the direction to the right and _has_to_move_down to true.
+func _on_left_border_area_entered(area: Area2D) -> void:
+	print("touched left border")
+	_direction = 1
+	_has_to_move_down = true
+
+## Called when the formation touches the right world border. Sets the direction to the left and _has_to_move_down to true.
+func _on_right_border_area_entered(area: Area2D) -> void:
+	print("touched right border")
+	_direction =  -1
+	_has_to_move_down = true
+
 
 func formation_position_to_global_position(formation_position: Vector2i) -> Vector2:
 	return Vector2(formation_position.x * HORIZONTAL_SPACING, formation_position.y * VERTICAL_SPACING)
@@ -79,7 +128,7 @@ func _reset_formation(columns: int, rows: int) -> void:
 
 	for row in range(rows):
 		for column in range(columns):
-			var enemy: Enemy = PACKED_ENEMY.instantiate()
+			var enemy: Enemy = _PACKED_ENEMY.instantiate()
 
 			enemy.formation_position = Vector2i(column, row)
 			enemy.position = formation_position_to_global_position(enemy.formation_position)
@@ -98,20 +147,3 @@ func _reset_formation(columns: int, rows: int) -> void:
 			await get_tree().create_timer(enemy_spawn_delay).timeout
 	
 	formation_ready.emit()
-
-func _on_enemy_died(score: int) -> void:
-	alive_enemies -= 1
-	enemy_died.emit(score)
-
-
-## Called when the formation touches the left world border. Sets the direction to the right and _has_to_move_down to true.
-func _on_left_border_area_entered(area: Area2D) -> void:
-	print("touched left border")
-	_direction = 1
-	_has_to_move_down = true
-
-## Called when the formation touches the right world border. Sets the direction to the left and _has_to_move_down to true.
-func _on_right_border_area_entered(area: Area2D) -> void:
-	print("touched right border")
-	_direction =  -1
-	_has_to_move_down = true
