@@ -14,10 +14,9 @@ WIP <br>
   - [X] Player missile
   - [X] 3 aliens (angel) types
   - [ ] 1 alien laser
-  - [ ] Special Invader (UFO equivalent)
 - [X] Create a player ship that moves side to side
 - [X] Add the ability for the player ship to fire rockets that travel up the screen
-- [ ] Multiple types of alien invaders (around 4)
+- [X] Multiple types of alien invaders (around 3)
   - [X] Enemies will move together in a grid. They cross the screen horizontally before dropping vertically and reversing their direction
 - [ ] Add bombs/bullets that the enemies drop. The player’s rockets can destroy enemy bullets
 - [ ] Make sure that the player’s bullets will destroy invaders, and the invader bullets will destroy the player
