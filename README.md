@@ -33,3 +33,4 @@ WIP <br>
 
 ### Credits
 RADIOACTIVE13 palette by Miguel Lucero -- https://lospec.com/palette-list/radioactive13 <br/>
+200 Free SFX by Kronbits - https://kronbits.itch.io/freesfx <br/>
