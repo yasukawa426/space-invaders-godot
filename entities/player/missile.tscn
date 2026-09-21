@@ -10,7 +10,7 @@ size = Vector2(4, 6)
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_rjxn5")
-speed = 250.0
+speed = 200.0
 flying_direction = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=722575274]

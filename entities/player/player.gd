@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 ## The maximum speed the player can move at.
-const MAX_SPEED: float = 150.0
+const MAX_SPEED: float = 100.0
 ## The acceleration of the player when moving.
 const ACCELERATION: float = 20000
 
