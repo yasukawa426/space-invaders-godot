@@ -61,7 +61,6 @@ func move() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	died.emit(_score)
 	queue_free()
-	##TODO: on last wave, play frame 2 on death freeze
 
 
 func _on_charge_timer_timeout() -> void:
