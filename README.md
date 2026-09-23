@@ -34,3 +34,5 @@ WIP <br>
 ### Credits
 RADIOACTIVE13 palette by Miguel Lucero -- https://lospec.com/palette-list/radioactive13 <br/>
 200 Free SFX by Kronbits - https://kronbits.itch.io/freesfx <br/>
+VHS and CRT monitor effect by pend00 - godotshaders.com/shader/VHS-and-CRT-monitor-effect
+Teleport effect by pend00 - https://godotshaders.com/shader/teleport-effect/
