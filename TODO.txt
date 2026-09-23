@@ -1,0 +1,7 @@
+Enemy:
+    [ ]: add charging visual effects
+    [ ]: add bullet art
+Player:
+    [ ]: add death/lifes/health - something like you die on the third hit - hp is represented by small 3 ships at the bottom of screen. damaged hp is a hollowed ship with only the outline. maybe add visual stuff to represent damage, like a helmet overlay that gets progressevily damaged with less health like a cracked screen and red tint and stuff would be pretty dope i like it this idea is sick.
+Formation:
+    [ ]: decrease shooting delay and shooting charging time to increase dificculty based on wave 

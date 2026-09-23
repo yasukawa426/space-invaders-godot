@@ -58,8 +58,6 @@ var _direction: int = 1
 ## The initial position of the formation when it is created. Used to reset the formation to its original position.
 var _initial_position: Vector2
 
-# TODO: decrease shooting delay and shooting charging time to increase dificculty based on wave 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	await get_tree().create_timer(0.1).timeout
