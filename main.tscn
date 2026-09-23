@@ -50,6 +50,9 @@ shape = SubResource("WorldBoundaryShape2D_272bh")
 [node name="Enemies" type="Node2D" parent="." unique_id=2017828672]
 z_index = 5
 
+[node name="ShootTimer" type="Timer" parent="Enemies" unique_id=274143501]
+one_shot = true
+
 [node name="MoveTimer" type="Timer" parent="Enemies" unique_id=1549741109]
 wait_time = 0.5
 script = ExtResource("7_272bh")
@@ -78,6 +81,7 @@ position = Vector2(130, 197)
 
 [connection signal="area_entered" from="LeftWall" to="Enemies/Formation" method="_on_left_border_area_entered"]
 [connection signal="area_entered" from="RightWall" to="Enemies/Formation" method="_on_right_border_area_entered"]
+[connection signal="timeout" from="Enemies/ShootTimer" to="Enemies/Formation" method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="Enemies/MoveTimer" to="Enemies/Formation" method="_on_move_timer_timeout"]
 [connection signal="timeout" from="Enemies/MoveTimer/SoundTimer" to="Enemies/Formation" method="_on_sound_timer_timeout"]
 [connection signal="enemy_died" from="Enemies/Formation" to="." method="_on_grid_formation_enemy_died"]
