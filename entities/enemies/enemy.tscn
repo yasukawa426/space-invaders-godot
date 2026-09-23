@@ -97,7 +97,7 @@ height = 18.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrfwl"]
 size = Vector2(18, 14)
 
-[node name="Enemy" type="Area2D" unique_id=674559780]
+[node name="Enemy" type="Area2D" unique_id=674559780 groups=["scalable_entites"]]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_vrelh")

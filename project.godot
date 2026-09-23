@@ -34,6 +34,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/PaletteTools/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg")
 
+[global_group]
+
+scalable_entites="Entites that should be resized (player and enemies)"
+
 [gui]
 
 theme/custom_font="uid://cd3fjybhyjq8n"
