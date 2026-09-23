@@ -1,6 +1,6 @@
 extends Node2D
 @onready var packed_enemy: PackedScene = preload("res://entities/enemies/enemy.tscn")
-@onready var formation: Node = $Entities/GridFormation
+@onready var formation: Node = $Entities/Formation
 @export var ENTITIES_SCALING: float = 0.6
 
 var current_score: int = 0
@@ -8,9 +8,9 @@ var current_score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Entities/Player.position= $Entities/PlayerStartingPosition.position
-	$Entities/GridFormation.position = $Entities/FormationStartingPosition.position
-	for entity in $Entities.get_children():
+	$Player/Player.position= $Player/PlayerStartingPosition.position
+	$Enemies/Formation.position = $Enemies/FormationStartingPosition.position
+	for entity in get_tree().get_nodes_in_group("scalable_entites"):
 		entity.scale = Vector2.ONE * ENTITIES_SCALING
 
 func _process(_delta: float) -> void:

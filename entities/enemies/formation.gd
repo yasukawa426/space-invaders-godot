@@ -34,7 +34,7 @@ const _AUDIO_PITCH_SCALE_STEP: float = 0.1
 
 
 ## AudioStreamPlayer for the formation movement.
-@onready var move_audio_player: AudioStreamPlayer = $"../../FormationAudioStreamPlayer"
+@onready var move_audio_player: AudioStreamPlayer = $"../FormationAudioStreamPlayer"
 ## Number of total enemies this formation has.
 var total_enemies: int
 ## Number of current alive enemies this formation has.

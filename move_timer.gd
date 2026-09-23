@@ -12,8 +12,8 @@ const DEATH_PAUSE_AMOUNT: float = 0.2
 
 ## Decreases await time when enemy dies and stops movement for a moment.
 func _on_grid_formation_enemy_died(score: int) -> void:
-	var alive: int =  $"../Entities/GridFormation".alive_enemies 
-	var total: int =  $"../Entities/GridFormation".total_enemies
+	var alive: int =  $"../Formation".alive_enemies 
+	var total: int =  $"../Formation".total_enemies
 	var progress: float = float(alive) / float(total)
 	
 	paused = true
