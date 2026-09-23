@@ -71,5 +71,5 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func _on_grid_formation_formation_reseting() -> void:
 	_can_act = false
 
-func _on_grid_formation_formation_ready() -> void:
+func _on_grid_formation_formation_ready(_total_enemies: int) -> void:
 	_can_act = true	

@@ -1,6 +1,5 @@
 extends Node2D
 @onready var packed_enemy: PackedScene = preload("res://entities/enemies/enemy.tscn")
-@onready var formation: Node = $Entities/Formation
 @export var ENTITIES_SCALING: float = 0.6
 
 var current_score: int = 0
@@ -22,6 +21,6 @@ func _process(_delta: float) -> void:
 	$Shield.scale.x = scale_value
 
 ## Enemy died, increase score
-func _on_grid_formation_enemy_died(score: int) -> void:
+func _on_grid_formation_enemy_died(score: int, _alive_enemies: int) -> void:
 	print("Enemy just died. Score: ", score)
 	current_score += score

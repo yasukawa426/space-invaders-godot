@@ -2,10 +2,10 @@
 ## The enemies start on the first 5 rows of the screen, and they move downwards as the game progresses, having in total 10 rows.
 ## The enemies first go to the edge of the screen, then they move downwards and go to the other edge of the screen, repeating this process until they reach the bottom of the screen (Earth).
 class_name Formation extends Node2D
-## Emitted whenever an enemy from the formation dies. "score" is the amount of score the dead enemy provides.
-signal enemy_died(score: int)
-## Emitted whenever the formation has finished spawning in enemies.
-signal formation_ready
+## Emitted whenever an enemy from the formation dies. "score" is the amount of score the dead enemy provides. "alive_enemies" is the amount of enemies still alive in the formation.
+signal enemy_died(score: int, alive_enemies: int)
+## Emitted whenever the formation has finished spawning in enemies. "total_enemies" is the total amount of created enemies in the formation.
+signal formation_ready (total_enemies: int)
 ## Emitted whenever the formation is about to reset.
 signal formation_reseting
 ## Emitted whenever the formation has been destroyed (all enemies are dead).
@@ -35,11 +35,11 @@ const _AUDIO_PITCH_SCALE_STEP: float = 0.1
 
 ## AudioStreamPlayer for the formation movement.
 @onready var move_audio_player: AudioStreamPlayer = $"../FormationAudioStreamPlayer"
-## Number of total enemies this formation has.
-var total_enemies: int
-## Number of current alive enemies this formation has.
-var alive_enemies: int
 
+## Number of total enemies this formation has.
+var _total_enemies: int
+## Number of current alive enemies this formation has.
+var _alive_enemies: int
 ## Wheter any enemy touched the border and the formation still hasnt moved down.
 var _has_to_move_down: bool = false
 ## The direction which the formation is moving. 1 means moving to the right, -1 means moving to the left.
@@ -84,11 +84,11 @@ func _on_sound_timer_timeout() -> void:
 	move_audio_player.play()
 
 func _on_enemy_died(score: int) -> void:
-	alive_enemies -= 1
-	enemy_died.emit(score)
+	_alive_enemies -= 1
+	enemy_died.emit(score, _alive_enemies)
 
 	## all dead
-	if alive_enemies <= 0:
+	if _alive_enemies <= 0:
 		formation_destroyed.emit()
 
 
@@ -117,10 +117,10 @@ func _reset_formation(columns: int, rows: int) -> void:
 	_has_to_move_down = false
 	position = _initial_position
 
-	total_enemies = columns * rows
-	alive_enemies = total_enemies
+	_total_enemies = columns * rows
+	_alive_enemies = _total_enemies
 
-	var enemy_spawn_delay: float = FORMATION_TOTAL_SPAWN_DELAY_AMOUNT / float(total_enemies)
+	var enemy_spawn_delay: float = FORMATION_TOTAL_SPAWN_DELAY_AMOUNT / float(_total_enemies)
 
 	for enemy in get_children():
 		enemy.queue_free()
@@ -146,4 +146,4 @@ func _reset_formation(columns: int, rows: int) -> void:
 
 			await get_tree().create_timer(enemy_spawn_delay).timeout
 	
-	formation_ready.emit()
+	formation_ready.emit(_total_enemies)
