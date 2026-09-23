@@ -20,7 +20,6 @@ var _score: int
 
 
 func set_type(type: Types):
-	##TODO: set correct sprite and point
 	match type:
 		Types.ANGEL:
 			_animator.animation = "angel"
@@ -36,9 +35,9 @@ func set_type(type: Types):
 			_animator.animation = "square"
 			_score = 10
 			$SquareCollisionShape2D.set_deferred("disabled", false)
-	
-	
-	pass
+
+		_:
+			assert(false, "Invalid enemy type: " + str(type))
 
 ## Spawn a bullet 
 func shoot():
