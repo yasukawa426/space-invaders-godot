@@ -1,17 +1,25 @@
 class_name Player extends CharacterBody2D
+## Emitted when the player is hit with no hp and dies.
+signal died
+## Emitted when the player takes damage.
+signal damaged
 
 ## The maximum speed the player can move at.
 const MAX_SPEED: float = 100.0
 ## The acceleration of the player when moving.
 const ACCELERATION: float = 20000
+## The player maxium health points. Dies on the 4th hit.
+const MAX_HP: int = 4
 
 ## Amount of degrees the player will rotate when moving left or right.
 const _TURN_DEGREE: float = 10.0
 
 @onready var _screen_size: Vector2 = get_viewport_rect().size
 @onready var _sprite_width: int = $Sprite2D.texture.get_width()
+@onready var current_hp: int = MAX_HP
 ## Bullet that will be spawned when shooting. Should be a scene that extends Bullet.
 @export var bullet: PackedScene = preload("res://entities/player/missile.tscn");
+
 
 ## Direction the player is currently moving towards. -1 for left, 1 for right, 0 for no movement.
 var _direction: float = 0.0
@@ -23,7 +31,6 @@ var _can_fire: bool = true
 var _can_act: bool = false
 
 
-
 func _physics_process(delta: float) -> void:
 	if not _can_act:
 		return
@@ -31,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	if _direction:
 		velocity.x = move_toward(velocity.x, MAX_SPEED * _direction, ACCELERATION * delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0, ACCELERATION  * delta * 2)
+		velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta * 2)
 
 	move_and_slide()
 
@@ -50,7 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and _can_fire:
 		_shoot()
 
-func _shoot():
+func _shoot() -> void:
 	var missile: Bullet = bullet.instantiate()
 	
 	missile.global_position = $BulletMarker2D.global_position
@@ -59,16 +66,35 @@ func _shoot():
 	add_sibling(missile)
 	_can_fire = false
 
+func _die() -> void:
+	set_deferred("visible", false)
+	_can_act = false
+
+	$Hitbox.set_deferred("monitoring", false)
+	$Hitbox.set_deferred("monitorable", false)
+
 func _on_missile_destroyed():
 	_can_fire = true
 
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	print("got shot")
+func _on_hitbox_area_entered(_area: Area2D) -> void:
+	print("Player is taking damage from bullet. current hp before damage: ", current_hp)
+	if current_hp > 1:
+		damaged.emit()
+		current_hp -= 1
+	else:
+		died.emit()
+		_die()
 
+func _reset() -> void:
+	current_hp = MAX_HP
+
+	set_deferred("visible", true)
+	$Hitbox.set_deferred("monitoring", true)
+	$Hitbox.set_deferred("monitorable", true)
 
 func _on_grid_formation_formation_reseting() -> void:
 	_can_act = false
 
 func _on_grid_formation_formation_ready(_total_enemies: int) -> void:
-	_can_act = true	
+	_can_act = true
