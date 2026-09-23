@@ -18,7 +18,7 @@ WIP <br>
 - [X] Add the ability for the player ship to fire rockets that travel up the screen
 - [X] Multiple types of alien invaders (around 3)
   - [X] Enemies will move together in a grid. They cross the screen horizontally before dropping vertically and reversing their direction
-- [ ] Add bombs/bullets that the enemies drop. The player’s rockets can destroy enemy bullets
+- [X] Add bombs/bullets that the enemies drop. The player’s rockets can destroy enemy bullets
 - [ ] Make sure that the player’s bullets will destroy invaders, and the invader bullets will destroy the player
 - [ ] Add a UI that tracks the player score and lives left. The player starts with three lives
 - [ ] Add sound effects (shooting, hit, music, game over, etc)
