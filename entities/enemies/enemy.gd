@@ -1,5 +1,8 @@
 class_name Enemy extends Area2D
+## Emitted whenever the enemy dies. "score" is the amount of score the dead enemy provides.
 signal died(score: int)
+## Emitted whenever the finished charging and should shoot a bullet. The formation should spawn a bullet as a sibling when this happens. "bullet_spawn_position" is the global position of the bullet spawn marker.
+signal finished_charging(bullet_global_spawn_position: Vector2)
 
 enum  Types {
 	ANGEL, ## Furthest row. 30 points.
@@ -15,9 +18,6 @@ var _bullet_spawn: Marker2D
 var _animator: AnimatedSprite2D
 ## Amount of point that will give when dying.
 var _score: int
-## Scene to be instantieted as bullet
-@export var _bullet_scene: PackedScene = preload("res://entities/enemies/laser.tscn")
-
 
 func set_type(type: Types):
 	match type:
@@ -39,35 +39,17 @@ func set_type(type: Types):
 		_:
 			assert(false, "Invalid enemy type: " + str(type))
 
-## Spawn a bullet 
-func shoot():
-	var projectile: Bullet = _bullet_scene.instantiate()
-	projectile.global_position = _bullet_spawn.global_position
-	
-	$"/root/Main/Entities".add_child(projectile)
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_animator = $AnimatedSprite2D
 	_bullet_spawn = $Marker2D
 
+## Starts charging to fire a bullet for `time` seconds. When the charge is finished, it will emit the `shoot_bullet` signal.
+func start_charging(time: float) -> void:
+	$ChargeTimer.start(time)
+
 ## Moving, just updates frame
 func move() -> void:
-	## OPS, this makes it move like a snake, but it is not the correct way to do it. The correct way is to move all enemies at once, and then move down when they reach the edge of the screen. Silly me.
-	# if formation_position.x == max_column and foward:
-	# 	foward = false
-	# 	formation_position.y += 1
-	# elif formation_position.x == 0 and not foward:
-	# 	foward = true
-	# 	formation_position.y += 1
-	
-	# elif foward:
-	# 	formation_position.x += 1
-	# else:
-	# 	formation_position.x -= 1
-	
-
 	# Update animation frame	
 	if _animator.frame == 0:
 		_animator.frame = 1
@@ -80,3 +62,7 @@ func _on_body_entered(body: Node2D) -> void:
 	died.emit(_score)
 	queue_free()
 	##TODO: on last wave, play frame 2 on death freeze
+
+
+func _on_charge_timer_timeout() -> void:
+	finished_charging.emit(_bullet_spawn.global_position)
