@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 ## Emitted when the player is hit with no hp and dies.
 signal died
 ## Emitted when the player takes damage.
-signal damaged
+signal damaged(hp: int)
 
 ## The maximum speed the player can move at.
 const MAX_SPEED: float = 100.0
@@ -80,14 +80,15 @@ func _on_missile_destroyed():
 func _on_hitbox_area_entered(_area: Area2D) -> void:
 	print("Player is taking damage from bullet. current hp before damage: ", current_hp)
 	if current_hp > 1:
-		damaged.emit()
 		current_hp -= 1
+		damaged.emit(current_hp)
 	else:
 		died.emit()
 		_die()
 
 func _reset() -> void:
 	current_hp = MAX_HP
+	_can_act = true
 
 	set_deferred("visible", true)
 	$Hitbox.set_deferred("monitoring", true)
