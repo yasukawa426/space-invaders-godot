@@ -33,3 +33,9 @@ func _process(_delta: float) -> void:
 func _on_grid_formation_enemy_died(score: int, _alive_enemies: int) -> void:
 	print("Enemy just died. Score: ", score)
 	current_score += score
+
+func _on_player_damaged(hp: int) -> void:
+	# we await for the hitstop to finish so we don't freeze any other ovarlay/camera animation.
+	await HitStopManager.hit_stop(HitStopManager.Duration.TINY)
+	$Player/Camera.add_trauma(0.2)
+	$HUD/Overlays.player_damaged(hp)

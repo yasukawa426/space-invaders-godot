@@ -6,14 +6,44 @@
 [ext_resource type="Script" uid="uid://dvsu6alayelak" path="res://entities/enemies/formation.gd" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://ckk0nktpf6u4v" path="res://shared/sprites/shield.png" id="4_7mycd"]
 [ext_resource type="PackedScene" uid="uid://b0v7koi3cfs8s" path="res://other/background.tscn" id="7_5vw27"]
-[ext_resource type="Script" uid="uid://cej3e17sk1wy1" path="res://move_timer.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://cej3e17sk1wy1" path="res://other/Gameplay/move_timer.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://do5n3ldmxuel6" path="res://other/UI/overlays.gd" id="8_4c57u"]
 [ext_resource type="AudioStream" uid="uid://bmqfc0uglj3jr" path="res://assets/audio/Retro Beeep 20.wav" id="9_4c57u"]
+[ext_resource type="Shader" uid="uid://bg5rfcbjtre0n" path="res://shared/shaders/crtmonitor.gdshader" id="9_kek77"]
+[ext_resource type="Script" uid="uid://bqt0rmtf0d71v" path="res://other/UI/camera_2d.gd" id="11_efxa6"]
+[ext_resource type="Texture2D" uid="uid://dehgwhpcph8lm" path="res://other/UI/damage_crack_1.png" id="12_dg77c"]
+[ext_resource type="Texture2D" uid="uid://decwm00418nxu" path="res://other/UI/damage_crack_3.png" id="13_w48qg"]
+[ext_resource type="Texture2D" uid="uid://bqw4iacx11twg" path="res://other/UI/damage_crack_2.png" id="14_vivmo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
 normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_272bh"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+shader = ExtResource("9_kek77")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/brightness = 1.05
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.2490000118275
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.1370000065075
 
 [node name="Main" type="Node2D" unique_id=510868186]
 texture_filter = 1
@@ -23,12 +53,14 @@ script = ExtResource("1_h2yge")
 
 [node name="Earth" type="Sprite2D" parent="." unique_id=643910386]
 z_index = 1
-position = Vector2(128, 120)
+position = Vector2(127.8, 111)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_lquwl")
 
 [node name="Shield" type="Sprite2D" parent="." unique_id=3736858]
 z_index = 1
-position = Vector2(128, 125)
+position = Vector2(127.8, 116)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("4_7mycd")
 
 [node name="LeftWall" type="Area2D" parent="." unique_id=1747562279]
@@ -79,6 +111,72 @@ position = Vector2(130, 197)
 [node name="Player" parent="Player" unique_id=108294258 instance=ExtResource("2_0xm2m")]
 position = Vector2(130, 197)
 
+[node name="Camera" type="Camera2D" parent="Player" unique_id=1934459431]
+position = Vector2(128, 120)
+ignore_rotation = false
+script = ExtResource("11_efxa6")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=331389969]
+
+[node name="Overlays" type="Control" parent="HUD" unique_id=559791227]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.5258789e-05
+offset_top = 2.2888184e-05
+offset_right = 255.99998
+offset_bottom = 240.00003
+script = ExtResource("8_4c57u")
+
+[node name="ScreenDistortion" type="ColorRect" parent="HUD/Overlays" unique_id=593000628]
+z_index = 10
+material = SubResource("ShaderMaterial_5vw27")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScreenCrack1" type="TextureRect" parent="HUD/Overlays" unique_id=1342327781]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.5258789e-05
+offset_top = -2.000023
+offset_bottom = -2.0000305
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dg77c")
+
+[node name="ScreenCrack2" type="TextureRect" parent="HUD/Overlays" unique_id=87187611]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("14_vivmo")
+
+[node name="ScreenCrack3" type="TextureRect" parent="HUD/Overlays" unique_id=1853253487]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 240.0
+texture = ExtResource("13_w48qg")
+
+[node name="HitFlash" type="ColorRect" parent="HUD/Overlays" unique_id=1821543547]
+modulate = Color(0.25882354, 0.17254902, 0.2, 0)
+z_index = 9
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="area_entered" from="LeftWall" to="Enemies/Formation" method="_on_left_border_area_entered"]
 [connection signal="area_entered" from="RightWall" to="Enemies/Formation" method="_on_right_border_area_entered"]
 [connection signal="timeout" from="Enemies/ShootTimer" to="Enemies/Formation" method="_on_shoot_timer_timeout"]
@@ -87,7 +185,8 @@ position = Vector2(130, 197)
 [connection signal="enemy_died" from="Enemies/Formation" to="." method="_on_grid_formation_enemy_died"]
 [connection signal="enemy_died" from="Enemies/Formation" to="Enemies/MoveTimer" method="_on_grid_formation_enemy_died"]
 [connection signal="formation_destroyed" from="Enemies/Formation" to="Enemies/MoveTimer" method="_on_grid_formation_formation_destroyed"]
-[connection signal="formation_ready" from="Enemies/Formation" to="Player/Player" method="_on_grid_formation_formation_ready"]
 [connection signal="formation_ready" from="Enemies/Formation" to="Enemies/MoveTimer" method="_on_grid_formation_formation_ready"]
-[connection signal="formation_reseting" from="Enemies/Formation" to="Player/Player" method="_on_grid_formation_formation_reseting"]
+[connection signal="formation_ready" from="Enemies/Formation" to="Player/Player" method="_on_grid_formation_formation_ready"]
 [connection signal="formation_reseting" from="Enemies/Formation" to="Enemies/MoveTimer" method="_on_grid_formation_formation_reseting"]
+[connection signal="formation_reseting" from="Enemies/Formation" to="Player/Player" method="_on_grid_formation_formation_reseting"]
+[connection signal="damaged" from="Player/Player" to="." method="_on_player_damaged"]
