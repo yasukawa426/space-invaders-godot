@@ -22,6 +22,7 @@ config/icon="uid://dy51uve3psgyc"
 [autoload]
 
 Global="*uid://cbfkmeoleimqa"
+HitStopManager="*uid://da2tda4gm68jq"
 
 [display]
 
