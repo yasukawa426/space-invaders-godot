@@ -45,7 +45,7 @@ The final boss is significantly different from the normal enemies.
 
 Move -> Aim -> Shoot -> Protect Earth shooting at bullets -> Kill enemies -> Formation moves faster -> Repeat
 
-The game will be divided in 3 waves of invaders, with a dialog between each. The player gets healed after every wave.
+The game will be divided in 3 waves of invaders, with a dialog between each. The player gets healed after every wave. Each wave will have a set minimum move and shoot time.
 
 The first wave will function as a tutorial, with a smaller number of enemies that move and shoot slower. The starting dialog will give a little exposure to the player about who they are and why they're fighting, and explain game mechanics with a in universe explanation (as in, "Remember, your ship can only take about 3 shots before exploding", etc.) 
 
