@@ -19,6 +19,9 @@ var _animator: AnimatedSprite2D
 ## Amount of point that will give when dying.
 var _score: int
 
+## Time the alien takes to materialize in seconds when spawned.
+@export var materialize_duration: float = 0.8
+
 func set_type(type: Types):
 	match type:
 		Types.ANGEL:
@@ -38,6 +41,10 @@ func set_type(type: Types):
 
 		_:
 			assert(false, "Invalid enemy type: " + str(type))
+		
+	# materializes in
+	var tween: Tween = create_tween()
+	tween.tween_method(_change_shader_progress, 1.0, 0.0, materialize_duration)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,3 +72,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_charge_timer_timeout() -> void:
 	finished_charging.emit(_bullet_spawn.global_position)
+
+func _change_shader_progress(value: float) -> void:
+	material.set_shader_parameter("progress", value)

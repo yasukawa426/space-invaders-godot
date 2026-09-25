@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://dem8h2pcofkei"]
 
+[ext_resource type="Shader" uid="uid://ckn22a04wqnld" path="res://entities/enemies/spawn_materialize_shader.gdshader" id="1_twyc1"]
 [ext_resource type="Script" uid="uid://davfm4mpilx4y" path="res://entities/enemies/enemy.gd" id="1_vrelh"]
 [ext_resource type="Texture2D" uid="uid://d24kiku0wbpr3" path="res://entities/enemies/angel_alien.png" id="2_2okab"]
 [ext_resource type="Texture2D" uid="uid://dd0xqfa8ynf5l" path="res://entities/enemies/angel_alien_2.png" id="3_5lf1o"]
 [ext_resource type="Texture2D" uid="uid://cdr4kt6ibw67u" path="res://entities/enemies/angel_alien_3.png" id="3_msovg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_msovg"]
+resource_local_to_scene = true
+shader = ExtResource("1_twyc1")
+shader_parameter/progress = 1.0
+shader_parameter/noise_desnity = 20.0
+shader_parameter/beam_size = 0.06700000248398
+shader_parameter/color = Color(0.25882354, 0.17254902, 0.2, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y6egb"]
 radius = 6.0
@@ -98,6 +107,7 @@ height = 18.0
 size = Vector2(18, 14)
 
 [node name="Enemy" type="Area2D" unique_id=674559780 groups=["scalable_entites"]]
+material = SubResource("ShaderMaterial_msovg")
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_vrelh")
@@ -111,6 +121,7 @@ disabled = true
 position = Vector2(0, 9)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1149364240]
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_wqcwe")
 animation = &"square"
 
