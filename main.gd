@@ -1,6 +1,7 @@
 extends Node2D
 @onready var packed_enemy: PackedScene = preload("res://entities/enemies/enemy.tscn")
 @export var ENTITIES_SCALING: float = 0.6
+@onready var is_debug = OS.is_debug_build()
 
 var current_score: int = 0
 
@@ -19,6 +20,14 @@ func _process(_delta: float) -> void:
 	var scale_value = 1.1 + sin(t) * 0.1
 	$Earth.scale.x = scale_value
 	$Shield.scale.x = scale_value
+	
+	if is_debug:
+		if Input.is_action_just_pressed("debug_reset"):
+			$Enemies/Formation._reset_formation(14,5)
+		if Input.is_action_just_pressed("debug_damage"):
+			$Player/Player._on_hitbox_area_entered(Area2D.new())
+		if Input.is_action_just_pressed("debug_heal"):
+			$Player/Player._reset()
 
 ## Enemy died, increase score
 func _on_grid_formation_enemy_died(score: int, _alive_enemies: int) -> void:
