@@ -1,30 +1,33 @@
 Enemy:
-    [ ] add charging visual effects
-    [ ] add bullet art
-    [ ] on last wave, play frame 2 on death freeze or always idk.
-    [ ] add sound effect:
-        [ ] death
+	[ ] add charging visual effects
+	[ ] add bullet art
+	[ ] on last wave, play frame 2 on death freeze or always idk.
+	[ ] add sound effect:
+		[ ] death
+		[ ] spawn
+		[ ] shoot
 Player:
-    [X] player has 4 hp
-    [X] player take damage when shot
-    [X] player dies when 0 hp (disappears and cant act)
-    [ ] add small invulnerabilty + blink when damaged?
-    [ ] add helmet/visor damage overlay, getting cracked when taking damage. At 2 and 1hp add red vignette. Flash the screen quickly to add the cracks.
-    [ ] add damage visual effect to the ship, like a explosion when dead and particles when hit.
-    [ ] add sound effect:
-        [ ] shooting
-        [ ] taking damage
-        [ ] death
+	[X] player has 4 hp
+	[X] player take damage when shot
+	[X] player dies when 0 hp (disappears and cant act)
+	[ ] add small invulnerabilty + blink when damaged?
+	[X] add helmet/visor damage overlay, getting cracked when taking damage. Flash the screen quickly to add the cracks.
+	[ ] add at 2 and 1hp red vignette
+	[ ] add damage visual effect to the ship, like a explosion when dead and particles when hit.
+	[ ] add sound effect:
+		[ ] shooting
+		[ ] taking damage
+		[ ] death
 
-    add death/lifes/health - something like you die on the third hit - hp is represented by small 3 ships at the bottom of screen. damaged hp is a hollowed ship with only the outline. maybe add visual stuff to represent damage, like a helmet overlay that gets progressevily damaged with less health like a cracked screen and red tint and stuff would be pretty dope i like it this idea is sick.
+	add death/lifes/health - something like you die on the third hit - hp is represented by small 3 ships at the bottom of screen. damaged hp is a hollowed ship with only the outline. maybe add visual stuff to represent damage, like a helmet overlay that gets progressevily damaged with less health like a cracked screen and red tint and stuff would be pretty dope i like it this idea is sick.
 Formation:
-    [ ] decrease shooting delay and shooting charging time to increase dificculty based on wave 
+	[ ] decrease shooting delay and shooting charging time to increase dificculty based on wave 
 
 Earth:
-    [ ] add hit detection
-    [ ] add shield - takes one hit for earth, gets destroyed and then recharge for like 5 seconds
-    [ ] add hp/destruction
+	[ ] add hit detection
+	[ ] add shield - takes one hit for earth, gets destroyed and then recharge for like 5 seconds
+	[ ] add hp/destruction
 Game:
-    [ ] main menu
-    [ ] gameover and retry
-    [ ] pause - gray tint to screen and a "- PAUSED -" at the center?
+	[ ] main menu
+	[ ] gameover and retry
+	[ ] pause - gray tint to screen and a "- PAUSED -" at the center?
