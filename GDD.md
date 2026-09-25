@@ -45,6 +45,17 @@ The final boss is significantly different from the normal enemies.
 
 Move -> Aim -> Shoot -> Protect Earth shooting at bullets -> Kill enemies -> Formation moves faster -> Repeat
 
+The game will be divided in 3 waves of invaders, with a dialog between each. The player gets healed after every wave.
+
+The first wave will function as a tutorial, with a smaller number of enemies that move and shoot slower. The starting dialog will give a little exposure to the player about who they are and why they're fighting, and explain game mechanics with a in universe explanation (as in, "Remember, your ship can only take about 3 shots before exploding", etc.) 
+
+The second wave should have a medium/normal difficulty.
+
+The third wave will be a lot more aggressive, and the enemies will have an extra frame of animation, showing a distorted form (maybe only show this form with no move animation or only show this frame on death, idk). 
+
+After the final wave, a boss appears. Both the player and the boss fly away from Earth, removing the need to protect it, making it a duel only. The player will shoot and move normally but the boss will instead have attack patterns with warning indicators, changing the normal gameplay. Would be sick to have a dope ass soundtrack and A LOT of visual effect. Like, really make it over the top and intense. Also, the dialog character that speaks with the player will be completely clueless and panicked when speaking to the player before the fight.
+
+
 ## Visual / Audio Style
 
 Simple pixel art, soft and moody. Drawn by me.
