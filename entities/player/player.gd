@@ -64,8 +64,7 @@ func _shoot() -> void:
 	missile.destroyed.connect(_on_missile_destroyed)
 	
 	add_sibling(missile)
-	_can_fire = false
-
+	$ShootAudioStreamPlayer.play()
 func _die() -> void:
 	set_deferred("visible", false)
 	_can_act = false
@@ -82,6 +81,8 @@ func _on_hitbox_area_entered(_area: Area2D) -> void:
 	if current_hp > 1:
 		current_hp -= 1
 		damaged.emit(current_hp)
+		
+		$HurtAudioStreamPlayer.play()
 	else:
 		died.emit()
 		_die()
