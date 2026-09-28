@@ -9,17 +9,17 @@ The focus of this game is creating all the art (and maybe the OST) myself. I'll 
 WIP <br>
 <img src="https://github.com/yasukawa426/space-invaders-godot/blob/master/doc/mockup.png" alt="Mockup print" width="400">
 ### Goals
-- [ ] Art
+- [X] Art
   - [X] Player ship
   - [X] Player missile
   - [X] 3 aliens (angel) types
-  - [ ] 1 alien laser
+  - [X] 1 alien laser
 - [X] Create a player ship that moves side to side
 - [X] Add the ability for the player ship to fire rockets that travel up the screen
 - [X] Multiple types of alien invaders (around 3)
   - [X] Enemies will move together in a grid. They cross the screen horizontally before dropping vertically and reversing their direction
 - [X] Add bombs/bullets that the enemies drop. The player’s rockets can destroy enemy bullets
-- [ ] Make sure that the player’s bullets will destroy invaders, and the invader bullets will destroy the player
+- [X] Make sure that the player’s bullets will destroy invaders, and the invader bullets will destroy the player
 - [ ] Add a UI that tracks the player score and lives left. The player starts with three lives
 - [ ] Add sound effects (shooting, hit, music, game over, etc)
 ### Bonus

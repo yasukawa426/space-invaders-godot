@@ -1,6 +1,6 @@
 Enemy:
-	[ ] add charging visual effects
-	[ ] add bullet art
+	[X] add charging visual effects
+	[X] add bullet art
 	[ ] on last wave, play frame 2 on death freeze or always idk.
 	[ ] add sound effect:
 		[ ] death
