@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dd0xqfa8ynf5l" path="res://entities/enemies/angel_alien_2.png" id="3_5lf1o"]
 [ext_resource type="Texture2D" uid="uid://cdr4kt6ibw67u" path="res://entities/enemies/angel_alien_3.png" id="3_msovg"]
 [ext_resource type="Texture2D" uid="uid://t641nykcccrd" path="res://entities/enemies/halo.png" id="3_w4yt1"]
+[ext_resource type="PackedScene" uid="uid://blleu8os7aadg" path="res://entities/enemies/halo_gpu_particles_2d.tscn" id="4_gj3y3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_msovg"]
 resource_local_to_scene = true
@@ -25,17 +26,21 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ipr6v"]
 gradient = SubResource("Gradient_w4yt1")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w4yt1"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_56i32"]
 resource_local_to_scene = true
 lifetime_randomness = 0.3
 particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 1)
 angle_min = -720.0
 angle_max = 720.0
 direction = Vector3(1, 1, 0)
 spread = 180.0
-initial_velocity_min = 15.0
-initial_velocity_max = 15.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
 gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.049999997
 color_ramp = SubResource("GradientTexture1D_ipr6v")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lf1o"]
@@ -125,6 +130,32 @@ height = 18.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrfwl"]
 size = Vector2(18, 14)
+
+[sub_resource type="Gradient" id="Gradient_gj3y3"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_56i32"]
+gradient = SubResource("Gradient_gj3y3")
+
+[sub_resource type="Curve" id="Curve_gj3y3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9898219, 0.34540993), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_56i32"]
+curve = SubResource("Curve_gj3y3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sb13e"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_56i32")
+color_ramp = SubResource("GradientTexture1D_56i32")
 
 [node name="Enemy" type="Area2D" unique_id=674559780 groups=["scalable_entites"]]
 material = SubResource("ShaderMaterial_msovg")

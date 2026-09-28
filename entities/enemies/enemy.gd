@@ -11,7 +11,7 @@ enum  Types {
 }
 
 const ORIGINAL_HALO_COLOR: Color = Color(255, 255, 255, 255)
-const CHARGED_HALO_COLOR: Color = Color(0.451, 0.318, 0.302, 1.0)
+const CHARGED_HALO_COLOR: Color = Color(0.584, 0.175, 0.17, 1.0)
 #const CHARGED_HALO_COLOR: Color = Color(0.506, 0.812, 0.855, 0.996)
 
 ## The position inside the formation, starting at (0, 0), a.k.a: (1, 3) - Second column, Fourth row

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://blleu8os7aadg"]
+
+[ext_resource type="Texture2D" uid="uid://c6ckg2rle2ckp" path="res://entities/enemies/bishie_sparkle_2.png" id="1_6j7cb"]
+
+[sub_resource type="Gradient" id="Gradient_w4yt1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ipr6v"]
+gradient = SubResource("Gradient_w4yt1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w4yt1"]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 1)
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.049999997
+color_ramp = SubResource("GradientTexture1D_ipr6v")
+
+[node name="HaloGPUParticles2D" type="GPUParticles2D" unique_id=1597579733]
+emitting = false
+amount = 6
+texture = ExtResource("1_6j7cb")
+process_material = SubResource("ParticleProcessMaterial_w4yt1")
