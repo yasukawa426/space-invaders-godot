@@ -32,9 +32,9 @@ const _INITIAL_AUDIO_PITCH_SCALE: float = 0.6
 ## The amount the pitch scale of the formation movement sound will decrease each time the sound is played.
 const _AUDIO_PITCH_SCALE_STEP: float = 0.1
 ## The initial amount of time in seconds it takes for an enemy to charge before shooting a bullet. 
-const _INITIAL_ENEMY_CHARGE_TIME: float = 2.0
+const _INITIAL_ENEMY_CHARGE_TIME: float = 4.0
 ## The initial amount of time in seconds between each different individual enemy starts charging. Slightly randomized to avoid enemies having a set rhythm.
-const _INITIAL_ENEMY_CHARGE_DELAY: float = 4.0
+const _INITIAL_ENEMY_CHARGE_DELAY: float = 3.0
 
 ## AudioStreamPlayer for the formation movement.
 @onready var move_audio_player: AudioStreamPlayer = $"../FormationAudioStreamPlayer"
