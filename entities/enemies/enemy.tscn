@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cdr4kt6ibw67u" path="res://entities/enemies/angel_alien_3.png" id="3_msovg"]
 [ext_resource type="Texture2D" uid="uid://t641nykcccrd" path="res://entities/enemies/halo.png" id="3_w4yt1"]
 [ext_resource type="PackedScene" uid="uid://blleu8os7aadg" path="res://entities/enemies/halo_gpu_particles_2d.tscn" id="4_gj3y3"]
+[ext_resource type="AudioStream" uid="uid://cuov7hsxpq2pr" path="res://entities/enemies/SFX_Hurt03.ogg" id="7_ipr6v"]
+[ext_resource type="PackedScene" uid="uid://k24yg0fxg7qt" path="res://entities/enemies/death_gpu_particles_2d.tscn" id="9_56i32"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_msovg"]
 resource_local_to_scene = true
@@ -131,32 +133,6 @@ height = 18.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrfwl"]
 size = Vector2(18, 14)
 
-[sub_resource type="Gradient" id="Gradient_gj3y3"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_56i32"]
-gradient = SubResource("Gradient_gj3y3")
-
-[sub_resource type="Curve" id="Curve_gj3y3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9898219, 0.34540993), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_56i32"]
-curve = SubResource("Curve_gj3y3")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sb13e"]
-lifetime_randomness = 0.5
-particle_flag_disable_z = true
-spread = 180.0
-flatness = 1.0
-initial_velocity_min = 25.0
-initial_velocity_max = 50.0
-gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_56i32")
-color_ramp = SubResource("GradientTexture1D_56i32")
-
 [node name="Enemy" type="Area2D" unique_id=674559780 groups=["scalable_entites"]]
 material = SubResource("ShaderMaterial_msovg")
 collision_layer = 2
@@ -175,11 +151,9 @@ position = Vector2(0, 9)
 z_index = 1
 texture = ExtResource("3_w4yt1")
 
-[node name="HaloGPUParticles2D" type="GPUParticles2D" parent="HaloSprite2D" unique_id=756816254]
-position = Vector2(0, -8)
-emitting = false
-amount = 6
-process_material = SubResource("ParticleProcessMaterial_w4yt1")
+[node name="HaloGPUParticles2D" parent="HaloSprite2D" unique_id=1597579733 instance=ExtResource("4_gj3y3")]
+position = Vector2(0, -7)
+process_material = SubResource("ParticleProcessMaterial_56i32")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1149364240]
 use_parent_material = true
@@ -196,6 +170,11 @@ disabled = true
 
 [node name="ChargeTimer" type="Timer" parent="." unique_id=411935882]
 one_shot = true
+
+[node name="DeathAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=472450474]
+stream = ExtResource("7_ipr6v")
+
+[node name="DeathGPUParticles2D" parent="." unique_id=1368294076 instance=ExtResource("9_56i32")]
 
 [connection signal="area_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]

@@ -61,12 +61,13 @@ func _ready() -> void:
 ## Starts charging to fire a bullet for `time` seconds. When the charge is finished, it will emit the `shoot_bullet` signal.
 ## Enemy's halo will change color and emit particles while charging.
 func start_charging(time: float) -> void:
-	$ChargeTimer.start(time)
+	var tween: Tween = create_tween()
 	_halo_particles.emitting = true
 	
-	var tween: Tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUINT)
-	tween.set_ease(Tween.EASE_OUT)
+	
+	#tween.set_trans(Tween.TRANS_QUINT)
+	#tween.set_ease(Tween.EASE_OUT)
+	$ChargeTimer.start(time)
 	tween.tween_property(self, "modulate", CHARGED_HALO_COLOR, time)
 	
 	await tween.finished
@@ -86,7 +87,20 @@ func move() -> void:
 
 ## Got shot - body is the bullet
 func _on_body_entered(body: Node2D) -> void:
+	##FIXME: figure a better way to die. Stop timer, only queue free after everything is finished and, maybe, make them freeze on the third frame last wave on death. with weird sound effects as well
 	died.emit(_score)
+	
+	$HaloSprite2D.hide()
+	$AnimatedSprite2D.hide()
+	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)
+	
+	$DeathAudioStreamPlayer.play()
+	
+	$DeathGPUParticles2D.emitting = true
+	await $DeathAudioStreamPlayer.finished
+	await $DeathGPUParticles2D.finished
+	
 	queue_free()
 
 
