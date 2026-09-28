@@ -10,6 +10,10 @@ enum  Types {
 	SQUARE, ## Front row, 10 points.
 }
 
+const ORIGINAL_HALO_COLOR: Color = Color(255, 255, 255, 255)
+const CHARGED_HALO_COLOR: Color = Color(0.451, 0.318, 0.302, 1.0)
+#const CHARGED_HALO_COLOR: Color = Color(0.506, 0.812, 0.855, 0.996)
+
 ## The position inside the formation, starting at (0, 0), a.k.a: (1, 3) - Second column, Fourth row
 var formation_position: Vector2i
 ## Marker representing the position the bullet will spawn
@@ -18,6 +22,9 @@ var _bullet_spawn: Marker2D
 var _animator: AnimatedSprite2D
 ## Amount of point that will give when dying.
 var _score: int
+
+## GPUParticles2D used to emit charging particles.
+@onready var _halo_particles: GPUParticles2D = $HaloSprite2D/HaloGPUParticles2D
 
 ## Time the alien takes to materialize in seconds when spawned.
 @export var materialize_duration: float = 0.8
@@ -52,8 +59,21 @@ func _ready() -> void:
 	_bullet_spawn = $Marker2D
 
 ## Starts charging to fire a bullet for `time` seconds. When the charge is finished, it will emit the `shoot_bullet` signal.
+## Enemy's halo will change color and emit particles while charging.
 func start_charging(time: float) -> void:
 	$ChargeTimer.start(time)
+	_halo_particles.emitting = true
+	
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "modulate", CHARGED_HALO_COLOR, time)
+	
+	await tween.finished
+	_halo_particles.emitting = false
+	
+	tween = create_tween()
+	tween.tween_property(self, "modulate", ORIGINAL_HALO_COLOR, time / 3.0)
 
 ## Moving, just updates frame
 func move() -> void:

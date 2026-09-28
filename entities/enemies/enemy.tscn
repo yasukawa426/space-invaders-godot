@@ -5,11 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://d24kiku0wbpr3" path="res://entities/enemies/angel_alien.png" id="2_2okab"]
 [ext_resource type="Texture2D" uid="uid://dd0xqfa8ynf5l" path="res://entities/enemies/angel_alien_2.png" id="3_5lf1o"]
 [ext_resource type="Texture2D" uid="uid://cdr4kt6ibw67u" path="res://entities/enemies/angel_alien_3.png" id="3_msovg"]
+[ext_resource type="Texture2D" uid="uid://t641nykcccrd" path="res://entities/enemies/halo.png" id="3_w4yt1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_msovg"]
 resource_local_to_scene = true
 shader = ExtResource("1_twyc1")
-shader_parameter/progress = 1.0
+shader_parameter/progress = 0.0
 shader_parameter/noise_desnity = 20.0
 shader_parameter/beam_size = 0.06700000248398
 shader_parameter/color = Color(0.25882354, 0.17254902, 0.2, 1)
@@ -17,6 +18,25 @@ shader_parameter/color = Color(0.25882354, 0.17254902, 0.2, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y6egb"]
 radius = 6.0
 height = 16.0
+
+[sub_resource type="Gradient" id="Gradient_w4yt1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ipr6v"]
+gradient = SubResource("Gradient_w4yt1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w4yt1"]
+resource_local_to_scene = true
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(1, 1, 0)
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ipr6v")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5lf1o"]
 atlas = ExtResource("2_2okab")
@@ -119,6 +139,16 @@ disabled = true
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1943677140]
 position = Vector2(0, 9)
+
+[node name="HaloSprite2D" type="Sprite2D" parent="." unique_id=118833689]
+z_index = 1
+texture = ExtResource("3_w4yt1")
+
+[node name="HaloGPUParticles2D" type="GPUParticles2D" parent="HaloSprite2D" unique_id=756816254]
+position = Vector2(0, -8)
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_w4yt1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1149364240]
 use_parent_material = true
