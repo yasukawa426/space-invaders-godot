@@ -38,4 +38,4 @@ func _on_player_damaged(hp: int) -> void:
 	# we await for the hitstop to finish so we don't freeze any other ovarlay/camera animation.
 	await HitStopManager.hit_stop(HitStopManager.Duration.TINY)
 	$Player/Camera.add_trauma(0.2)
-	$HUD/Overlays.player_damaged(hp)
+	$HUD.player_damaged(hp)
